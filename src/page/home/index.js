@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "../../components/appBar";
 import SideNav from "../../components/sideNavBar";
 import useStyle from "./style.js";
@@ -20,22 +20,21 @@ export default function Home() {
     { route: "/step-three", label: "step three" },
   ];
 
-  useMemo(() => {
-    if(countLeft<10){
-     setTimeout(() => {
-      setCountLeft(countRight+1);
-    }, 1000);
-  }
+  useEffect(() => {
+    if (countLeft < 10) {
+      setTimeout(() => {
+        setCountLeft(countRight + 1);
+      }, 1000);
+    }
   }, [countRight]);
 
-  useMemo(() => {
-    if(countRight<9 && countLeft%2===0){
-     setTimeout(() => {
-      setCountRight(countLeft+1);
-    }, 1000);
-  }
+  useEffect(() => {
+    if (countRight < 9 && countLeft % 2 === 0) {
+      setTimeout(() => {
+        setCountRight(countLeft + 1);
+      }, 1000);
+    }
   }, [countLeft]);
-
 
   return (
     <>
@@ -70,15 +69,15 @@ export default function Home() {
                 <Router>
                   <Stepper steps={steps} />
                   <Switch>
-                    <Route path="/step-one">
-                      <div className={classes.mainContents}>step one</div>
-                    </Route>
-                    <Route path="/step-two">
-                      <div className={classes.mainContents}>step two</div>
-                    </Route>
-                    <Route path="/step-three">
-                      <div className={classes.mainContents}>step three</div>
-                    </Route>
+                    {steps.map((menu, index) => {
+                      return (
+                        <Route key={index} path={menu.route}>
+                          <div className={classes.mainContents}>
+                            {menu.label}
+                          </div>
+                        </Route>
+                      );
+                    })}
                   </Switch>
                 </Router>
               </Grid>
