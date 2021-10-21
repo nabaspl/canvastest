@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import AppBar from "../../components/appBar";
 import SideNav from "../../components/sideNavBar";
 import useStyle from "./style.js";
@@ -13,7 +13,7 @@ export default function Home() {
   const classes = useStyle();
   const [countLeft, setCountLeft] = useState(0);
   const [countRight, setCountRight] = useState(0);
-  const [toggle, setToggle] = useState("countLeft");
+  const [conut, setCount] = useState(0);
 
   const steps = [
     { route: "step-one", label: "step one" },
@@ -21,13 +21,16 @@ export default function Home() {
     { route: "step-three", label: "step three" },
   ];
 
-  const handleIncrement = () => {
-    if (toggle === "countLeft") setCountLeft(countLeft + 1);
-    else setCountRight(countRight + 1);
+  useMemo(() => {
+    setTimeout(() => {
+      if (conut <= 100) {
+        setCount(conut + 1);
+        if (conut % 2) setCountRight(conut);
+        else setCountLeft(conut);
+      }
+    }, 1000);
+  }, [conut]);
 
-    let tt = toggle === "countLeft" ? "countRight" : "countLeft";
-    setToggle(tt);
-  };
   return (
     <>
       <AppBar />
@@ -46,11 +49,7 @@ export default function Home() {
                 </Paper>
               </Grid>
               <Grid item textAlign="center" xs={4}>
-                <Button
-                  variant="contained"
-                  onClick={handleIncrement}
-                  className={classes.counterBtn}
-                >
+                <Button variant="contained" className={classes.counterBtn}>
                   Increment
                   <Add />
                 </Button>
