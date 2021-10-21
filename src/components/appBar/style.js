@@ -4,6 +4,9 @@ const useStyle = makeStyles({
         height: "3.5rem",
         position:"sticky"
     },
+    headerContainer:{
+        display:"flex"
+    },
     headerRight:{
         backgroundColor: "rgb(49, 57, 77)",
         height: "3.5rem",

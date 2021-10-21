@@ -10,7 +10,9 @@ const useStyle = makeStyles({
         minHeight: "calc(100vh - 3.5rem)",
         position: "fixed",
         zIndex: "11",
-        borderRight: "1px solid rgb(221, 221, 221)"
+        borderRight: "1px solid rgb(221, 221, 221)",
+        width:"3.5rem"
+
     },
     mainSection:{
         width: "calc(100% - 3.5rem)",
@@ -18,7 +20,7 @@ const useStyle = makeStyles({
         overflow: "hidden",
         minHeight: "calc(100vh - 3.5rem)",
         padding: "1rem",
-        marginLeft:"4rem"
+        marginLeft: "3.5rem"
     },
     CounterPaper:{
         height:"3rem",
