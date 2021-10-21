@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import AppBar from "../../components/appBar";
 import SideNav from "../../components/sideNavBar";
 import useStyle from "./style.js";
-import { Button, Container } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import Add from "@mui/icons-material/Add";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -13,23 +13,29 @@ export default function Home() {
   const classes = useStyle();
   const [countLeft, setCountLeft] = useState(0);
   const [countRight, setCountRight] = useState(0);
-  const [conut, setCount] = useState(0);
 
   const steps = [
-    { route: "step-one", label: "step one" },
-    { route: "step-two", label: "step two" },
-    { route: "step-three", label: "step three" },
+    { route: "/step-one", label: "step one" },
+    { route: "/step-two", label: "step two" },
+    { route: "/step-three", label: "step three" },
   ];
 
   useMemo(() => {
-    setTimeout(() => {
-      if (conut <= 100) {
-        setCount(conut + 1);
-        if (conut % 2) setCountRight(conut);
-        else setCountLeft(conut);
-      }
+    if(countLeft<10){
+     setTimeout(() => {
+      setCountLeft(countRight+1);
     }, 1000);
-  }, [conut]);
+  }
+  }, [countRight]);
+
+  useMemo(() => {
+    if(countRight<9 && countLeft%2===0){
+     setTimeout(() => {
+      setCountRight(countLeft+1);
+    }, 1000);
+  }
+  }, [countLeft]);
+
 
   return (
     <>
@@ -40,7 +46,7 @@ export default function Home() {
         </div>
         <div className={classes.mainSection}>
           {/* <Breadcrumbs /> */}
-          <Container>
+          <Box>
             <Grid container spacing={3}>
               <Grid item textAlign="center" xs={4}>
                 <Paper elevation={3} className={classes.CounterPaper}>
@@ -77,7 +83,7 @@ export default function Home() {
                 </Router>
               </Grid>
             </Grid>
-          </Container>
+          </Box>
         </div>
       </main>
     </>
