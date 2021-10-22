@@ -12,6 +12,10 @@ const useStyle = makeStyles({
         "&:hover":{
             width:"20rem"
         }
+    },
+    link:{
+        textDecoration: "none",
+        color: "inherit"
     }
 })
 export default useStyle;

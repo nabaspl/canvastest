@@ -1,0 +1,19 @@
+.user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem;
+  align-items: center;
+}
+span.field {
+  font-size: 2rem;
+  padding: 0rem 1rem;
+}
+span.value {
+  font-size: 1.5rem;
+  padding: 0rem 1rem;
+}
+.link-style{
+    text-decoration: none;
+    color: inherit;
+}

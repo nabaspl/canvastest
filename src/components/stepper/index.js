@@ -7,16 +7,19 @@ export default function HorizontalNonLinearStepper({ steps }) {
     const [activeIndex,setactiveIndex]  =  React.useState(0);
   return (
     <div className="stepper">
-      <div className="connector visited"></div>
+      <div style={{width: "50%"}} className="connector visited"></div>
       {steps.map((menu,index)=>{
           
-          return(<>
-          <div key={`node${index}`} className={`node ${location.pathname === menu.route ?"active":""}`} onClick={()=>setactiveIndex(index)}>
-          <Link key={`link${index}`} className="label" to={menu.route}>{menu.label}</Link>
+          return(<React.Fragment key={index}>
+          <div  className={`node ${location.pathname === menu.route ?"active":""}`} onClick={()=>setactiveIndex(index)}>
+          <Link  className="label" to={menu.route}>{menu.label}</Link>
         </div>
-        <div key={`coennctor${index}`} className={`connector ${index < activeIndex ?"visited":""}`}></div>
-        </>);
+        <div className={`connector ${index < activeIndex ?"visited":""}`}></div>
+        
+        </React.Fragment>);
+        
       })}
+      <div  style={{width: "50%"}} className={`connector`}></div>
     </div>
   );
 }
