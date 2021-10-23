@@ -1,10 +1,9 @@
-import React,{useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -19,15 +18,14 @@ import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import useStyle from "./style.js";
 import FormHelperText from "@mui/material/FormHelperText";
+import { useHistory } from "react-router-dom";
 
-import { useHistory } from 'react-router-dom';
-
-import {formContext} from '../../../App';
+import { formContext } from "../../../App";
 
 export default function BasicTextFields() {
-  const [formValue,setFormValue] = useContext(formContext);
+  const [formValue, setFormValue] = useContext(formContext);
   const classes = useStyle();
-  const [isUpdate,setIsUpdate] = React.useState(false);
+  const [isUpdate, setIsUpdate] = React.useState(false);
   const [values, setValues] = React.useState({
     firstName: "",
     lastName: "",
@@ -42,22 +40,22 @@ export default function BasicTextFields() {
   let history = useHistory();
 
   const redirect = () => {
-    history.push('/userinfo')
-  }
-  
-  useEffect(()=>{
-    
-    if(Object.keys(formValue).length != 0 && formValue.constructor === Object )
-    setIsUpdate(true);
+    history.push("/userinfo");
+  };
 
-    setValues(formValue);
-  },[]);
+  useEffect(() => {
+    if (Object.keys(formValue).length !== 0) {
+      setIsUpdate(true);
+      setValues(formValue);
+    }
+  }, []);
 
   const [error, setError] = React.useState({});
 
   const handleChange = (prop) => (event) => {
     setError({});
-    if (prop == "terms") setValues({ ...values, [prop]: event.target.checked });
+    if (prop === "terms")
+      setValues({ ...values, [prop]: event.target.checked });
     else setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -71,7 +69,7 @@ export default function BasicTextFields() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  console.log("values",values);
+  console.log("values", values);
   const validateForm = () => {
     let isError = false;
     if (values.firstName.length < 2) {
@@ -97,12 +95,7 @@ export default function BasicTextFields() {
         errorMessage: { email: "email min lenght 2" },
       });
     }
-    // var lowerRegex = new RegExp("(?=.*[a-z])");
-    // var upperRegex = new RegExp("(?=.*[A-Z])");
-    // var numberRegex = new RegExp("(?=.*[0-9])");
-    
-
-    if (values.password.length<8) {
+    if (values.password.length < 8) {
       isError = true;
       setError({
         ...error,
@@ -111,22 +104,21 @@ export default function BasicTextFields() {
       });
     }
     if (!values.course) {
-        isError = true;
-        setError({
-          ...error,
-          error: true,
-          errorMessage: { course: "Please select a course" },
-        });
-      }
-      if (!values.gender) {
-        isError = true;
-        setError({
-          ...error,
-          error: true,
-          errorMessage: { gender: "Please select a gender" },
-        });
-      }
-    
+      isError = true;
+      setError({
+        ...error,
+        error: true,
+        errorMessage: { course: "Please select a course" },
+      });
+    }
+    if (!values.gender) {
+      isError = true;
+      setError({
+        ...error,
+        error: true,
+        errorMessage: { gender: "Please select a gender" },
+      });
+    }
 
     if (!values.terms) {
       isError = true;
@@ -145,8 +137,6 @@ export default function BasicTextFields() {
   const handleSubmit = (event) => {
     event.preventDefault();
     validateForm();
-    // You should see email and password in console.
-    // ..code to submit form to backend here...
   };
 
   return (
@@ -166,19 +156,15 @@ export default function BasicTextFields() {
           id="first-name"
           label="First name"
           variant="outlined"
-          color="secondary"
+          className={classes.root}
           value={values.firstName}
           error={
-            Object.keys(error).length != 0 &&
-            error.constructor === Object &&
-            !!error.errorMessage.firstName
+            Object.keys(error).length !== 0 && !!error.errorMessage.firstName
           }
         />
-        {Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.firstName && (
-            <FormHelperText>{error.errorMessage.firstName}</FormHelperText>
-          )}
+        {Object.keys(error).length !== 0 && !!error.errorMessage.firstName && (
+          <FormHelperText>{error.errorMessage.firstName}</FormHelperText>
+        )}
       </FormControl>
       <FormControl sx={{ m: 1, width: "30ch" }}>
         <TextField
@@ -187,19 +173,15 @@ export default function BasicTextFields() {
           id="last-name"
           label="Last name"
           variant="outlined"
-          color="secondary"
+          className={classes.root}
           value={values.lastName}
           error={
-            Object.keys(error).length != 0 &&
-            error.constructor === Object &&
-            !!error.errorMessage.lastName
+            Object.keys(error).length !== 0 && !!error.errorMessage.lastName
           }
         />
-        {Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.lastName && (
-            <FormHelperText>{error.errorMessage.lastName}</FormHelperText>
-          )}
+        {Object.keys(error).length !== 0 && !!error.errorMessage.lastName && (
+          <FormHelperText>{error.errorMessage.lastName}</FormHelperText>
+        )}
       </FormControl>
       <FormControl sx={{ m: 1, width: "62ch" }}>
         <TextField
@@ -209,67 +191,56 @@ export default function BasicTextFields() {
           id="email"
           label="Email"
           variant="outlined"
-          color="secondary"
+          className={classes.root}
           value={values.email}
-          error={
-            Object.keys(error).length != 0 &&
-            error.constructor === Object &&
-            !!error.errorMessage.email
-          }
+          error={Object.keys(error).length !== 0 && !!error.errorMessage.email}
         />
-        {Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.email && (
-            <FormHelperText>{error.errorMessage.email}</FormHelperText>
-          )}
+        {Object.keys(error).length !== 0 && !!error.errorMessage.email && (
+          <FormHelperText>{error.errorMessage.email}</FormHelperText>
+        )}
       </FormControl>
       <FormControl sx={{ m: 1, width: "62ch" }} variant="outlined">
-        <InputLabel
-          htmlFor="outlined-adornment-password"
-          color="secondary"
-          required
-        >
-          Password
-        </InputLabel>
-        <OutlinedInput
+        <TextField
           required
           error={
-            Object.keys(error).length != 0 &&
-            error.constructor === Object &&
-            !!error.errorMessage.password
+            Object.keys(error).length !== 0 && !!error.errorMessage.password
           }
-          color="secondary"
-          id="outlined-adornment-password"
           type={values.showPassword ? "text" : "password"}
           value={values.password}
+          className={classes.root}
           onChange={handleChange("password")}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {values.showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
+          variant="outlined"
           label="Password"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
-        {Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.password && (
-            <FormHelperText>{error.errorMessage.password}</FormHelperText>
-          )}
+        {Object.keys(error).length !== 0 && !!error.errorMessage.password && (
+          <FormHelperText>{error.errorMessage.password}</FormHelperText>
+        )}
       </FormControl>
-      <FormControl sx={{ m: 1, width: "30ch" }} component="fieldset"
-      error={
-        Object.keys(error).length != 0 &&
-        error.constructor === Object &&
-        !!error.errorMessage.gender
-      }>
-        <FormLabel component="legend">Gender</FormLabel>
+      <FormControl
+        sx={{ m: 1, width: "30ch" }}
+        component="fieldset"
+        error={Object.keys(error).length !== 0 && !!error.errorMessage.gender}
+      >
+        <FormLabel
+          component="legend"
+          sx={{ "&.Mui-focused": { color: "rgb(226, 0, 116)" } }}
+        >
+          Gender
+        </FormLabel>
         <RadioGroup
           required
           aria-label="gender"
@@ -279,23 +250,48 @@ export default function BasicTextFields() {
           name="radio-buttons-group"
           className={classes.formRadio}
         >
-          <FormControlLabel sx={{  width: "8ch" }} value="female" control={<Radio />} label="Female" />
-          <FormControlLabel sx={{  width: "8ch" }} value="male" control={<Radio />} label="Male" />
-          <FormControlLabel sx={{  width: "8ch" }} value="other" control={<Radio />} label="Other" />
+          <FormControlLabel
+            sx={{ width: "8ch" }}
+            value="female"
+            control={
+              <Radio sx={{ "&.Mui-checked": { color: "rgb(226, 0, 116)" } }} />
+            }
+            label="Female"
+          />
+          <FormControlLabel
+            sx={{ width: "8ch" }}
+            value="male"
+            control={
+              <Radio sx={{ "&.Mui-checked": { color: "rgb(226, 0, 116)" } }} />
+            }
+            label="Male"
+          />
+          <FormControlLabel
+            sx={{ width: "8ch" }}
+            value="other"
+            control={
+              <Radio sx={{ "&.Mui-checked": { color: "rgb(226, 0, 116)" } }} />
+            }
+            label="Other"
+          />
         </RadioGroup>
-        {Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.gender && (
-            <FormHelperText>{error.errorMessage.gender}</FormHelperText>
-          )}
+        {Object.keys(error).length !== 0 && !!error.errorMessage.gender && (
+          <FormHelperText>{error.errorMessage.gender}</FormHelperText>
+        )}
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, width: "30ch" }}
-      error={
-        Object.keys(error).length != 0 &&
-        error.constructor === Object &&
-        !!error.errorMessage.course
-      }>
-        <InputLabel id="demo-simple-select-label" color="secondary">
+      <FormControl
+        variant="standard"
+        sx={{ m: 1, width: "30ch" }}
+        error={
+          Object.keys(error).length !== 0 &&
+          error.constructor === Object &&
+          !!error.errorMessage.course
+        }
+      >
+        <InputLabel
+          id="demo-simple-select-label"
+          sx={{ "&.Mui-focused": { color: "rgb(226, 0, 116)" } }}
+        >
           Courses
         </InputLabel>
         <Select
@@ -304,41 +300,39 @@ export default function BasicTextFields() {
           value={values.course}
           label="Courses"
           onChange={handleChange("course")}
-          color="secondary"
           required
         >
           <MenuItem value="neet">NEET</MenuItem>
           <MenuItem value="jee">JEE</MenuItem>
           <MenuItem value="jee-main">JEE-MAIN</MenuItem>
         </Select>
-        {Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.course && (
-            <FormHelperText>{error.errorMessage.course}</FormHelperText>
-          )}
+        {Object.keys(error).length !== 0 && !!error.errorMessage.course && (
+          <FormHelperText>{error.errorMessage.course}</FormHelperText>
+        )}
       </FormControl>
       <FormControl
-        error={
-          Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.terms
-        }
+        error={Object.keys(error).length !== 0 && !!error.errorMessage.terms}
         sx={{ m: 1, width: "62ch" }}
       >
         <FormControlLabel
-          control={<Checkbox onChange={handleChange("terms")} name="terms" checked={values.terms}/>}
+          control={
+            <Checkbox
+              sx={{ "&.Mui-checked": { color: "rgb(226, 0, 116)" } }}
+              onChange={handleChange("terms")}
+              name="terms"
+              checked={values.terms}
+            />
+          }
           label="Terms and condition accepted"
-          color="secondary"
+          className={classes.root}
         />
-        {Object.keys(error).length != 0 &&
-          error.constructor === Object &&
-          !!error.errorMessage.terms && (
-            <FormHelperText>{error.errorMessage.terms}</FormHelperText>
-          )}
+        {Object.keys(error).length !== 0 && !!error.errorMessage.terms && (
+          <FormHelperText>{error.errorMessage.terms}</FormHelperText>
+        )}
       </FormControl>
       <FormControl sx={{ m: 1, width: "62ch" }}>
         <Button type="submit" variant="contained" className={classes.formBtn}>
-          {isUpdate?"Update":"Sign up"}
+          {isUpdate ? "Update" : "Sign up"}
         </Button>
       </FormControl>
     </Box>

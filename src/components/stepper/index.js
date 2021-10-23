@@ -11,8 +11,8 @@ export default function HorizontalNonLinearStepper({ steps }) {
       {steps.map((menu,index)=>{
           
           return(<React.Fragment key={index}>
-          <div  className={`node ${location.pathname === menu.route ?"active":""}`} onClick={()=>setactiveIndex(index)}>
-          <Link  className="label" to={menu.route}>{menu.label}</Link>
+          <div  className={`node ${location.pathname === `/dashboard${menu.route}` ?"active":""}`} onClick={()=>setactiveIndex(index)}>
+          <Link  className={`label ${location.pathname === `/dashboard${menu.route}` ?"active":""}`} to={`/dashboard${menu.route}`}>{menu.label}</Link>
         </div>
         <div className={`connector ${index < activeIndex ?"visited":""}`}></div>
         

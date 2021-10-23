@@ -22,7 +22,9 @@ export default function UserInfo() {
         },
       }}
     >
+      {Object.keys(formValue).length!==0 &&
       <Paper elevation={3}>
+        
         <div className="user-info">
           <span className="field"> First Name</span> :
           <span className="value">{formValue.firstName} </span>
@@ -50,7 +52,7 @@ export default function UserInfo() {
         </Button>
         </Link>
         </div>
-      </Paper>
+      </Paper>}
     </Box>
   );
 }

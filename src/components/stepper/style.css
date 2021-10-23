@@ -14,8 +14,8 @@
     display: flex;
     align-items: center;
     position: relative;
-    width: 2%;
-    height: 1rem;
+    width: 13px;
+    height: 9px;
     border-radius: 50%;
     border: 1px solid rgb(226, 0, 116);
     justify-content: center;
@@ -27,7 +27,7 @@
 
 .connector {
     width: 10rem;
-    border-top: 1px solid #80807d7a;
+    border-top: 1px solid rgb(208 208 216);
 }
 
 .label {
@@ -37,4 +37,7 @@
     text-align: center;
     text-decoration: none;
     color: inherit;
+}
+.label.active {
+    color: rgb(226, 0, 116);
 }

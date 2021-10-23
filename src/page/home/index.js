@@ -18,20 +18,19 @@ export default function Home() {
   
  
   const location = useLocation();
-  let currentRoute = location.pathname;
   const classes = useStyle();
   const [countLeft, setCountLeft] = useState(0);
   const [countRight, setCountRight] = useState(0);
 
   const steps = [
-    { route: `${currentRoute}/step-1`, label: "step 1" },
-    { route: `${currentRoute}/step-2`, label: "step 2" },
-    { route: `${currentRoute}/step-3`, label: "step 3" },
-    { route: `${currentRoute}/step-4`, label: "step 4" },
-    { route: `${currentRoute}/step-5`, label: "step 5" },
-    { route: `${currentRoute}/step-6`, label: "step 6" },
-    { route: `${currentRoute}/step-7`, label: "step 7" },
-    { route: `${currentRoute}/step-8`, label: "step 8" },
+    { route: '/step-1', label: "step 1" },
+    { route: `/step-2`, label: "step 2" },
+    { route: `/step-3`, label: "test nasda asda asdasd" },
+    { route: `/step-4`, label: "step 4" },
+    { route: `/step-5`, label: "step 5" },
+    { route: `/step-6`, label: "step 6" },
+    { route: `/step-7`, label: "step 7" },
+    { route: `/step-8`, label: "step 8" },
   ];
 
   useMemo(() => {
@@ -53,7 +52,6 @@ export default function Home() {
       <Grid container spacing={3}>
         <Grid item textAlign="center" xs={4}>
           <Paper elevation={3} className={classes.CounterPaper}>
-            {" "}
             count-{countLeft}
           </Paper>
         </Grid>
@@ -65,7 +63,6 @@ export default function Home() {
         </Grid>
         <Grid item textAlign="center" xs={4}>
           <Paper elevation={3} className={classes.CounterPaper}>
-            {" "}
             count-{countRight}
           </Paper>
         </Grid>
@@ -82,7 +79,7 @@ export default function Home() {
               />
               {steps.map((menu, index) => {
                 return (
-                  <Route key={index} path={menu.route}>
+                  <Route key={index} path={`/dashboard${menu.route}`}>
                     <div className={classes.mainContents}>{menu.label}</div>
                   </Route>
                 );
