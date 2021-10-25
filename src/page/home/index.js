@@ -9,15 +9,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useLocation,
   Redirect
 } from "react-router-dom";
 
 
 export default function Home() {
   
- 
-  const location = useLocation();
   const classes = useStyle();
   const [countLeft, setCountLeft] = useState(0);
   const [countRight, setCountRight] = useState(0);
@@ -49,7 +46,7 @@ export default function Home() {
 
   return (
     <Box>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} padding="1rem">
         <Grid item textAlign="center" xs={4}>
           <Paper elevation={3} className={classes.CounterPaper}>
             count-{countLeft}
@@ -66,7 +63,9 @@ export default function Home() {
             count-{countRight}
           </Paper>
         </Grid>
-        <Grid item textAlign="center" xs={12}>
+      </Grid>
+      <Grid container spacing={3}>
+      <Grid item textAlign="center" xs={12}>
           <Router>
             <Stepper steps={steps} />
             <Switch>
@@ -87,7 +86,7 @@ export default function Home() {
             </Switch>
           </Router>
         </Grid>
-      </Grid>
+        </Grid>
     </Box>
   );
 }

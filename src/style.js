@@ -19,7 +19,6 @@ const useStyle = makeStyles({
     position: "relative",
     overflow: "hidden",
     minHeight: "calc(100vh - 3.5rem)",
-    padding: "1rem",
     marginLeft: "3.5rem",
   }
 });
