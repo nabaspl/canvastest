@@ -30,19 +30,26 @@ export default function Home() {
     { route: `/step-8`, label: "step 8" },
   ];
 
+  // useMemo(() => {
+  //   if (countLeft < 100) {
+  //     setTimeout(() => {
+  //       setCountLeft(countRight + 1);
+  //     }, 1000);
+  //   }
+  //   if (countRight < 99 && countLeft % 2 === 0) {
+  //     setTimeout(() => {
+  //       setCountRight(countLeft + 1);
+  //     }, 1000);
+  //   }
+  // }, [countRight,countLeft]);
   useMemo(() => {
-    if (countLeft < 100) {
-      setTimeout(() => {
+    setTimeout(() => {
+    if (countLeft < 100) 
         setCountLeft(countRight + 1);
-      }, 1000);
-    }
-    if (countRight < 99 && countLeft % 2 === 0) {
-      setTimeout(() => {
+    if (countRight < 99 && countLeft % 2 === 0)
         setCountRight(countLeft + 1);
       }, 1000);
-    }
   }, [countRight,countLeft]);
-
 
   return (
     <Box>
