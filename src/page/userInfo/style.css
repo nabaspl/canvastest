@@ -17,3 +17,11 @@ span.value {
     text-decoration: none;
     color: inherit;
 }
+
+.user-info-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+}

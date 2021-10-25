@@ -4,6 +4,8 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
+import CheckIcon from '@mui/icons-material/Check';
+import AddIcon from '@mui/icons-material/Add';
 import { Link } from "react-router-dom";
 
 import "./style.css";
@@ -45,14 +47,24 @@ export default function UserInfo() {
           <span className="field"> Gender </span> :
           <span className="value">{formValue.gender} </span>
         </div>
-        <div className="user-info">
+        <div className="user-info-btns">
         <Link  to='/account' className="link-style">
-        <Button variant="outlined" startIcon={<EditIcon />}>
+        <Button variant="outlined" startIcon={<EditIcon />} sx={{backgroundColor:"rgb(49, 57, 77)"}}>
           Edit
+        </Button>
+        </Link>
+        <Link  to='/account' className="link-style">
+        <Button variant="contained" sx={{backgroundColor:"rgb(226, 0, 116)"}}  startIcon={<CheckIcon />} onClick={()=>setFormValue({})}>
+          Save
         </Button>
         </Link>
         </div>
       </Paper>}
+      {Object.keys(formValue).length===0 && <Link  to='/account' className="link-style">
+        <Button variant="contained" sx={{backgroundColor:"rgb(226, 0, 116)"}}  startIcon={<AddIcon />}>
+          Create new
+        </Button>
+        </Link>}
     </Box>
   );
 }
